@@ -76,7 +76,7 @@ namespace Lesson3_AutorizationTest
 
         private void WaitElements(By itemlocator)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(1000));
+            var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
             wait.Until(e => e.FindElements(itemlocator));
         }
 
