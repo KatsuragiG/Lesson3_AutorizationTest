@@ -18,16 +18,12 @@ namespace Lesson3_AutorizationTest
         public void TestInitialize()
         {
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
-            driver.Manage().Window.Maximize();
-            //driver.Navigate().GoToUrl("http://the-internet.herokuapp.com/basic_auth");
+            driver.Manage().Window.Maximize();            
         }
 
         [TestMethod]
         public void TestMethod1()
-        {
-            //var alert_win = driver.SwitchTo().Alert();
-            //alert_win.SetAuthenticationCredentials(password, userName);
-            //alert_win.Accept();
+        {            
             var urlConnected = string.Format(urlPage, password, userName);
             driver.Navigate().GoToUrl(urlConnected);
             var actualText = driver.FindElement(successedText).Text.ToString();
