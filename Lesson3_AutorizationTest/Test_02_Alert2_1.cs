@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -16,13 +17,13 @@ namespace Lesson3_AutorizationTest
         private readonly By jsPromptButton = By.XPath("//button[text() = 'Click for JS Prompt']");
         private readonly By resultSection = By.Id("result");
 
-        private string expectedTextAlert = "I am a JS Alert";
-        private string expectedTextConfirm = "I am a JS Confirm";
-        private string expectedTextPrompt = "I am a JS prompt";
+        private readonly string expectedTextAlert = "I am a JS Alert";
+        private readonly string expectedTextConfirm = "I am a JS Confirm";
+        private readonly string expectedTextPrompt = "I am a JS prompt";
 
-        private string expectedResultAlert = "You successfully clicked an alert";
-        private string expectedResultConfirm = "You clicked: Ok";
-        private string expectedResultPrompt = "You entered: {0}";
+        private readonly string expectedResultAlert = "You successfully clicked an alert";
+        private readonly string expectedResultConfirm = "You clicked: Ok";
+        private readonly string expectedResultPrompt = "You entered: {0}";
 
         IWebDriver driver;
 
@@ -38,9 +39,9 @@ namespace Lesson3_AutorizationTest
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.IsTrue(mainPageIsShown(), "Page is not opened");            
+            Assert.IsTrue(MainPageIsShown(), "Page is not opened");            
             var jsAllert = driver.FindElement(jsAllertButton);            
-            var random = randomString(10);
+            var random = RandomString(10);
             WaitElements(jsAllertButton);
             jsAllert.Click();
 
@@ -80,16 +81,16 @@ namespace Lesson3_AutorizationTest
             wait.Until(e => e.FindElements(itemlocator));
         }
 
-        private bool mainPageIsShown()
+        private bool MainPageIsShown()
         {
-           var shown = driver.FindElement(pageAlerts).Displayed;
+           var shown = driver.FindElements(pageAlerts).Any();
            return shown;
         }
 
-        private string randomString(int Length)
+        private static string RandomString(int Length)
         {            
-            Random rnd = new Random();
-            StringBuilder sb = new StringBuilder(Length - 1);
+            var rnd = new Random();
+            var sb = new StringBuilder(Length - 1);
             var Alphabet = "ASDaSDASDHASDasdjkkjlksjpfodkbslnahnambergv";
             int Position = 0;
             for (int i = 0; i < Length; i++)
@@ -100,8 +101,7 @@ namespace Lesson3_AutorizationTest
             return sb.ToString();
         }        
 
-        [TestCleanup]
-        public void exit()
+        public void Exit()
         {
             driver.Quit();        
         }

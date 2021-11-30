@@ -7,10 +7,10 @@ namespace Lesson3_AutorizationTest
     public class Test_01_BasicAutorization
     {
         private readonly By successedText = By.XPath("//div[@class = 'example']//p");
-        private string password = "admin";
-        private string userName = "admin";
-        private string urlPage = "http://{0}:{0}@the-internet.herokuapp.com/basic_auth";
-        private string expectedText = "Congratulations! You must have the proper credentials.";
+        private readonly string password = "admin";
+        private readonly string userName = "admin";
+        private readonly string urlPage = "http://{0}:{0}@the-internet.herokuapp.com/basic_auth";
+        private readonly string expectedText = "Congratulations! You must have the proper credentials.";       
 
         IWebDriver driver;
 
@@ -18,7 +18,7 @@ namespace Lesson3_AutorizationTest
         public void TestInitialize()
         {
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
-            driver.Manage().Window.Maximize();            
+            driver.Manage().Window.Maximize();
         }
 
         [TestMethod]

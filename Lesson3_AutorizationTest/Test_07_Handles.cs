@@ -14,7 +14,7 @@ namespace Lesson3_AutorizationTest
         private readonly By linkWindow = By.XPath("//*[@href = '/windows/new']");
         private readonly By pageName = By.XPath("//h3[text()]");
 
-        private string expectedPageName = "New Window";
+        private readonly string expectedPageName = "New Window";
 
         IWebDriver driver;
 

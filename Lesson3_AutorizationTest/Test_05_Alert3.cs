@@ -11,7 +11,7 @@ namespace Lesson3_AutorizationTest
         private readonly By page = By.XPath("//div[@class = 'example']");
         private readonly By menu = By.Id("hot-spot");
 
-        private string expectedTextAlert = "You selected a context menu";
+        private readonly string expectedTextAlert = "You selected a context menu";
 
         IWebDriver driver;
 

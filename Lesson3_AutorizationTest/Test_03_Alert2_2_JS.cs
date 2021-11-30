@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Text;
 using System.Threading;
@@ -12,13 +13,13 @@ namespace Lesson3_AutorizationTest
         private readonly By pageAlerts = By.XPath("//div[@class = 'row']/following-sibling::div");        
         private readonly By resultSection = By.Id("result");
 
-        private string expectedTextAlert = "I am a JS Alert";
-        private string expectedTextConfirm = "I am a JS Confirm";
-        private string expectedTextPrompt = "I am a JS prompt";
+        private readonly string expectedTextAlert = "I am a JS Alert";
+        private readonly string expectedTextConfirm = "I am a JS Confirm";
+        private readonly string expectedTextPrompt = "I am a JS prompt";
 
-        private string expectedResultAlert = "You successfully clicked an alert";
-        private string expectedResultConfirm = "You clicked: Ok";
-        private string expectedResultPrompt = "You entered: {0}";
+        private readonly string expectedResultAlert = "You successfully clicked an alert";
+        private readonly string expectedResultConfirm = "You clicked: Ok";
+        private readonly string expectedResultPrompt = "You entered: {0}";
 
         IWebDriver driver;
 
@@ -28,15 +29,15 @@ namespace Lesson3_AutorizationTest
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("http://the-internet.herokuapp.com/javascript_alerts");
-            Thread.Sleep(10000);
+            WaitPageToLoad(pageAlerts);
         }
 
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.IsTrue(mainPageIsShown(), "Page is not opened");
+            Assert.IsTrue(MainPageIsShown(), "Page is not opened");
                       
-            var random = randomString(10);
+            var random = RandomString(10);
             Thread.Sleep(500);
             ((IJavaScriptExecutor)driver).ExecuteScript("jsAlert()");            
 
@@ -70,16 +71,16 @@ namespace Lesson3_AutorizationTest
             Assert.AreEqual(expectedResultForPrompt, results, $"Results don't contains {expectedResultForPrompt}");
         }
 
-        private bool mainPageIsShown()
+        private bool MainPageIsShown()
         {
            var shown = driver.FindElement(pageAlerts).Displayed;
            return shown;
         }
 
-        private string randomString(int Length)
+        private string RandomString(int Length)
         {            
-            Random rnd = new Random();
-            StringBuilder sb = new StringBuilder(Length - 1);
+            var rnd = new Random();
+            var sb = new StringBuilder(Length - 1);
             var Alphabet = "ASDaSDASDHASDasdjkkjlksjpfodkbslnahnambergv";
             int Position = 0;
             for (int i = 0; i < Length; i++)
@@ -88,10 +89,16 @@ namespace Lesson3_AutorizationTest
                 sb.Append(Alphabet[Position]);
             }
             return sb.ToString();
-        }        
+        }
+
+        private void WaitPageToLoad(By itemlocator)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
+            wait.Until(e => e.FindElements(itemlocator));
+        }
 
         [TestCleanup]
-        public void exit()
+        public void Exit()
         {
             driver.Quit();        
         }

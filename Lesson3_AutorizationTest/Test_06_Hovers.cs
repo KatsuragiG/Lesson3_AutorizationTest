@@ -13,7 +13,7 @@ namespace Lesson3_AutorizationTest
         private const string userName = usersIcon + "//h5";
         private const string userLink = usersIcon + "//a";
         
-        private string expectedUserName = "name: user{0}";        
+        private readonly string expectedUserName = "name: user{0}";        
 
         IWebDriver driver;
 

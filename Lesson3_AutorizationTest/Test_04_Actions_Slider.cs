@@ -26,23 +26,23 @@ namespace Lesson3_AutorizationTest
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.IsTrue(mainPageIsShown(), "Page is not opened");
+            Assert.IsTrue(MainPageIsShown(), "Page is not opened");
 
-            var rundomsValue = randomValue();
-            slideToRight(rundomsValue);
-            var sliderVal = driver.FindElement(sliderValue).Text.ToString();
+            var rundomsValue = RandomValue();
+            SlideToRight(rundomsValue);
+            var sliderVal = driver.FindElement(sliderValue).Text;
             double expectedValue = (double)rundomsValue / 2;
             Assert.AreEqual(expectedValue.ToString(), sliderVal, $"{expectedValue} are not equals to {sliderVal}");
         }
 
-        private int randomValue()
+        private int RandomValue()
         {
-            Random rnd = new Random();
+            var rnd = new Random();
             var value = rnd.Next(1, 9);
             return value;
         }
 
-        private void slideToRight(int value)
+        private void SlideToRight(int value)
         {
             for (int i = 0; i < value; i++)
             {
@@ -51,7 +51,7 @@ namespace Lesson3_AutorizationTest
             }
         }
 
-        private bool mainPageIsShown()
+        private bool MainPageIsShown()
         {
             var shown = driver.FindElement(page).Displayed;
             return shown;
@@ -59,7 +59,7 @@ namespace Lesson3_AutorizationTest
 
         [TestCleanup]
 
-        public void exit()
+        public void Exit()
         {
             driver.Quit();
         }

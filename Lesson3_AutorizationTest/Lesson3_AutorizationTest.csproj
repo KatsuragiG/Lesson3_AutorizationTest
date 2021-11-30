@@ -15,7 +15,12 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
     <PackageReference Include="Selenium.Support" Version="4.0.1" />
     <PackageReference Include="Selenium.WebDriver" Version="4.0.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="96.0.4664.4500" />
     <PackageReference Include="SeleniumExtras.WaitHelpers" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
   </ItemGroup>
 
 </Project>
